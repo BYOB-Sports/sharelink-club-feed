@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>BYOB Sports - Open Post</title>
+  <meta charset="utf-8" />
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const postId = params.get('postId');
+
+    // Build deep link
+    window.deepLink = postId
+      ? `byobsports://club/post/${postId}`
+      : `byobsports://club`;
+
+    // Try to open app immediately
+    window.location.href = window.deepLink;
+  </script>
+</head>
+
+<body>
+  <div style="text-align: center; padding-top: 100px; font-family: Arial, sans-serif;">
+    <h1>Opening BYOB Sports…</h1>
+    <p>
+      If nothing happens,
+      <a id="deeplink" href="#">tap here to open the app</a>.
+    </p>
+  </div>
+
+  <script>
+    document.getElementById('deeplink').href = window.deepLink;
+  </script>
+</body>
+</html>
