@@ -65,6 +65,7 @@
     <p id="sub">If the app didn't open, use the button below.</p>
 
     <a class="btn primary" id="open" href="#">Open in the app</a>
+    <a class="btn secondary" id="web" href="https://play.byobsports.com/">Continue in browser</a>
 
     <p class="stores-label">Don't have the app?</p>
     <a class="btn secondary" href="https://apps.apple.com/us/app/byob-sports-social-tennis-app/id6751515573">Download for iPhone</a>
@@ -131,6 +132,13 @@
 
       var deepLink = 'byobsports://club/post/' + encodeURIComponent(id);
       document.getElementById('open').href = deepLink;
+
+      // "Continue in browser": the same target on the web app. The app route is
+      // the deep link's path, so the web address is that path on the web origin.
+      // This only sets a link. Nothing navigates here, so the redirect below keeps
+      // the timing that was settled on a device. The fallback above (an incomplete
+      // link) leaves the button on the web home page.
+      document.getElementById('web').href = 'https://play.byobsports.com/' + deepLink.slice('byobsports://'.length);
 
       function redirect() {
         // Assignment, not replace(): this is the exact form measured to skip
